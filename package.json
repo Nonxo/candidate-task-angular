@@ -23,6 +23,7 @@
     "@ngrx/schematics": "17.2.0",
     "@ngrx/store": "17.2.0",
     "@ngrx/store-devtools": "17.2.0",
+    "primeng": "^18.0.0-beta.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.7"
