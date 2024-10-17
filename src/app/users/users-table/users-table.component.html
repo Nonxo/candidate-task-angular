@@ -1,0 +1,41 @@
+@if (users) {
+  <div class="card">
+    <p-table
+      [value]="users"
+      [paginator]="true"
+      [rows]="10"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[10, 25, 50]"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:25%">Name</th>
+          <th style="width:25%">Email</th>
+          <th style="width:25%">Role</th>
+          <th style="width:25%">Joined</th>
+          <th style="width:25%">Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <img
+              [alt]="'img'"
+              ngSrc="{{user.avatar}}"
+              height="32"
+              width="32"
+              style="vertical-align: middle"
+            />
+            <span>{{ user.name }}</span>
+          </td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.createdAt | date : 'MM/dd/yyyy' }}</td>
+          <td>
+            <p-tag [value]="user.status" [severity]="getStatusStyle(user.status)" />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+}
