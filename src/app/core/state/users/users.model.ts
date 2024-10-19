@@ -2,7 +2,6 @@ import {EntityState} from "@ngrx/entity";
 
 export interface User {
   id: string;
-  avatar: string;
   name: string;
   email: string;
   status: boolean;

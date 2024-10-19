@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {TableModule} from "primeng/table";
 import {InputTextModule} from "primeng/inputtext";
@@ -12,22 +12,21 @@ import {InputIconModule} from "primeng/inputicon";
 import {User} from "../../core/state/users/users.model";
 import {FormsModule} from "@angular/forms";
 import {SliderModule} from "primeng/slider";
+import {FormatStatusPipe} from "../../core/pipe/format.status.pipe";
+import {CardModule} from "primeng/card";
+import {Ripple} from "primeng/ripple";
 
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [CommonModule, TableModule, InputTextModule, TagModule, SelectModule, MultiSelectModule, ProgressBarModule, ButtonModule, IconFieldModule, InputIconModule, FormsModule, SliderModule, NgOptimizedImage],
+  imports: [CommonModule, TableModule, InputTextModule, TagModule, SelectModule, MultiSelectModule, ProgressBarModule, ButtonModule, IconFieldModule, InputIconModule, FormsModule, SliderModule, NgOptimizedImage, FormatStatusPipe, CardModule, Ripple],
   templateUrl: './users-table.component.html',
   styleUrl: './users-table.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersTableComponent implements OnInit {
+export class UsersTableComponent {
 
-  @Input() users!: User[] | null
-
-
-  ngOnInit(): void {
-  }
+  @Input() users: User[] | null = null
 
   getStatusStyle(status: boolean) {
     if (status) {

@@ -4,7 +4,6 @@ import {User, UsersState} from "./users.model";
 
 const emptyUser: User = {
   id: '',
-  avatar: '',
   name: '',
   email: '',
   status: false,
