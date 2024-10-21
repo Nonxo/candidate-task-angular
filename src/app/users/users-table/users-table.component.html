@@ -15,8 +15,9 @@
         <input
           pInputText
           type="text"
-          placeholder="Search by name, email or role"
+          placeholder="Search by name, email or status"
           size="40"
+          (input)="onFilterUsers($event)"
         />
       </p-iconfield>
     </ng-template>
@@ -58,9 +59,4 @@
       </tr>
     </ng-template>
   </p-table>
-
-  @if ((selectedUser$ | async) && modalVisible) {
-    <app-user-details [user]="selectedUser$ | async" [visible]="modalVisible" (visibleChange)="modalVisible = $event"></app-user-details>
-  }
-
 }

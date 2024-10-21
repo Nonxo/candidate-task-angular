@@ -2,11 +2,12 @@
   header="User Details"
   [modal]="true"
   [(visible)]="visible"
+  [resizable]="false"
+  appendTo="body"
   [style]="{ width: '50rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   (onHide)="hideDialog()"
   [maximizable]="true"
-  class="w-full"
 >
   <form [formGroup]="userDetailsForm" class="flex flex-column align-items-center gap-6 w-full">
     <p-floatlabel class="mt-5">
@@ -26,12 +27,12 @@
       <p-datePicker id="createdAt" formControlName="createdAt" [iconDisplay]="'input'" [showIcon]="true" inputStyleClass="w-20rem p-3" dateFormat="dd.MM.yy" />
       <label for="createdAt">Joined</label>
     </p-floatlabel>
-    <div class="flex flex-wrap gap-3">
-     <p-radioButton id="active" name="status" formControlName="status" [value]="true" variant="filled" />
+    <div class="flex flex-wrap gap-3 field-checkbox">
+     <p-radioButton id="active" formControlName="status" inputId="active" [value]="true" variant="filled" />
       <label [for]="'active'" class="font-normal">Active</label>
 
-      <p-radioButton id="inactive" name="status" formControlName="status" [value]="false" variant="filled" />
-      <label [for]="'active'" class="font-normal">Inactive</label>
+      <p-radioButton id="inactive" formControlName="status" inputId="inactive" [value]="false" variant="filled" />
+      <label [for]="'inactive'" class="font-normal">Inactive</label>
     </div>
     <p-button [disabled]="userDetailsForm.pristine ||userDetailsForm.invalid" label="Save" icon="pi pi-check" iconPos="right" (click)="updateUser()" />
   </form>

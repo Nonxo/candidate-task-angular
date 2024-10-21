@@ -1,5 +1,5 @@
 import {createReducer, on} from "@ngrx/store";
-import {User, UsersState} from "./users.model";
+import {User, UserState} from "./users.model";
 import { createEntityAdapter, EntityAdapter } from "@ngrx/entity";
 import {UserDetailsActions, UsersPageActions} from "./users.action";
 
@@ -7,8 +7,9 @@ export const userFeatureKey = 'users';
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
 
-export const initialState: UsersState = adapter.getInitialState({
+export const initialState: UserState = adapter.getInitialState({
   selectedUserId: null,
+  filterByKeyword: '',
   loading: false,
   error: null
 })
@@ -27,8 +28,9 @@ export const usersReducer = createReducer(
     error
   })),
 
-  on(UsersPageActions.filterUsers, (state) => ({
+  on(UsersPageActions.filterUsers, (state, { keyword }) => ({
     ...state,
+    filterByKeyword: keyword
   })),
 
   on(UserDetailsActions.selectUser, (state, {userId}) => ({

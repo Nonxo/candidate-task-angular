@@ -14,12 +14,13 @@ export type Role = { label: string; value: string }
 
 
 export interface AppState {
-  users: EntityState<User>;  // Global state slice for users
+  users: UserState;  // Global state slice for users
 }
 
 
-export interface UsersState extends EntityState<User> {
+export interface UserState extends EntityState<User> {
   selectedUserId: string | null;
+  filterByKeyword: string;
   loading: boolean;
   error: string | null;
 }

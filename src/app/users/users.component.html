@@ -1,3 +1,6 @@
 <ng-container>
-  <app-users-table [users]="users$ | async"></app-users-table>
+  <app-users-table [users]="users$ | async" (viewUser)="viewUserDetails($event)" (filterKeywordChanged)="filterUsers($event)"></app-users-table>
+  @if ((selectedUser$ | async) && modalVisible) {
+    <app-user-details [user]="selectedUser$ | async" [visible]="modalVisible" (visibleChange)="modalVisible = $event"></app-user-details>
+  }
 </ng-container>

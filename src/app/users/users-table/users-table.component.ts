@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {TableModule} from "primeng/table";
 import {InputTextModule} from "primeng/inputtext";
@@ -17,7 +17,7 @@ import {CardModule} from "primeng/card";
 import {Ripple} from "primeng/ripple";
 import {UserDetailsComponent} from "../user-details/user-details.component";
 import {select, Store} from "@ngrx/store";
-import {UserDetailsActions} from "../../core/state/users/users.action";
+import {UserDetailsActions, UsersPageActions} from "../../core/state/users/users.action";
 import {Observable} from "rxjs";
 import {selectCurrentUser} from "../../core/state/users/users.selector";
 
@@ -32,10 +32,8 @@ import {selectCurrentUser} from "../../core/state/users/users.selector";
 export class UsersTableComponent {
 
   @Input() users: User[] | null = null;
-  selectedUser$: Observable<User | undefined> | undefined;
-  modalVisible: boolean = false;
-
-  constructor(private readonly store: Store<AppState>) { }
+  @Output() viewUser = new EventEmitter<User>();
+  @Output() filterKeywordChanged = new EventEmitter<string>();
 
   getStatusStyle(status: boolean) {
     if (status) {
@@ -46,9 +44,12 @@ export class UsersTableComponent {
   }
 
   onViewUser(user: User) {
-    this.store.dispatch(UserDetailsActions.selectUser({ userId: user.id }));
-    this.selectedUser$ = this.store.pipe(select(selectCurrentUser));
-    this.modalVisible = true;
+    this.viewUser.emit(user);
+  }
+
+  onFilterUsers(event: Event) {
+    const keyword = (event.target as HTMLInputElement).value;
+    this.filterKeywordChanged.emit(keyword);
   }
 
 }
