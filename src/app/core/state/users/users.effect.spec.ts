@@ -39,8 +39,8 @@ describe('UsersEffects', () => {
         testScheduler.run(({ cold, hot, expectObservable }) => {
 
             const users: User[] = [
-                { id: '1', name: 'John Doe', email: 'john@example.com', status: true, role: 'admin', createdAt: '2022-01-01' },
-                { id: '2', name: 'Jane Doe', email: 'jane@example.com', status: true, role: 'user', createdAt: '2022-01-02' }
+                { id: '1', firstName: 'John', lastName: 'Doe', email: 'john@example.com', status: true, role: 'admin', createdAt: '2022-01-01' },
+                { id: '2', firstName: 'Jane', lastName: 'Jane Doe', email: 'jane@example.com', status: true, role: 'user', createdAt: '2022-01-02' }
             ];
 
             const action = UsersPageActions.loadUsers();

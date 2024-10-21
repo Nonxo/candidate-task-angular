@@ -24,8 +24,8 @@ describe('UserService', () => {
 
   it('should fetch all users', (done) => {
     const users: User[] = [
-      { id: '1', avatar: '', name: 'John Doe', email: 'john@example.com', status: true, role: 'admin', createdAt: '2022-01-01' },
-      { id: '2', avatar: '', name: 'Jane Doe', email: 'jane@example.com', status: true, role: 'user', createdAt: '2022-01-02' }
+      { id: '1',  firstName: 'John', lastName: 'Doe', email: 'john@example.com', status: true, role: 'admin', createdAt: '2022-01-01' },
+      { id: '2', firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', status: true, role: 'user', createdAt: '2022-01-02' }
     ];
 
     service.fetchAllUsers().subscribe((response) => {
@@ -38,14 +38,14 @@ describe('UserService', () => {
 
 
   it('should handle error', () => {
-    service.fetchAllUsers().subscribe(
-
-      () => fail('should not be called'),
-
-      (error: HttpErrorResponse) => {
+    service.fetchAllUsers().subscribe( {
+      next: () => fail('should not be called'),
+      error: (error: HttpErrorResponse) => {
         expect(error.status).toBe(500);
         expect(error.error).toBe('Server Error');
       }
+      }
+
     );
 
     // Simulate an error response

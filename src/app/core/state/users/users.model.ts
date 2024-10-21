@@ -2,12 +2,15 @@ import {EntityState} from "@ngrx/entity";
 
 export interface User {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   status: boolean;
   role: string;
   createdAt: string;
 }
+
+export type Role = { label: string; value: string }
 
 
 export interface AppState {

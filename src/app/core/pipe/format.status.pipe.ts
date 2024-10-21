@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FormatStatusPipe implements PipeTransform {
 
   transform(value: boolean | null | undefined): string {
-    return value ? 'Active' : 'Inactive';
+    return value ? 'active' : 'inactive';
   }
 
 }
