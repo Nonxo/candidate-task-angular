@@ -1,0 +1,62 @@
+@if (users) {
+  <p-table
+    [value]="users"
+    [paginator]="true"
+    [rows]="15"
+    [scrollable]="true"
+    scrollHeight="flex"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <p-iconfield iconPosition="left">
+        <p-inputicon>
+          <i class="pi pi-search"></i>
+        </p-inputicon>
+        <input
+          pInputText
+          type="text"
+          placeholder="Search by name, email or status"
+          size="40"
+          (input)="onFilterUsers($event)"
+        />
+      </p-iconfield>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:20%">Name</th>
+        <th style="width:25%">Email</th>
+        <th style="width:35%">Role</th>
+        <th style="width:15%">Joined</th>
+        <th style="width:15%">Status</th>
+        <th style="width:10%"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>
+          <span>{{ user.firstName }} {{ user.lastName }}</span>
+        </td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.createdAt | date : 'dd.MM.yyyy' }}</td>
+        <td>
+          <p-tag [value]="user.status | formatStatus" [severity]="getStatusStyle(user.status)" rounded />
+        </td>
+        <td>
+          <div class="flex items-center justify-center gap-2">
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-eye"
+              text
+              rounded
+              severity="secondary"
+              (click)="onViewUser(user)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+}

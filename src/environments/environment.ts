@@ -2,8 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export const API_KEY = '670e6d3b3e7151861654759e'
+
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: `https://${API_KEY}.mockapi.io/api`,
 };
 
 /*

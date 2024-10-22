@@ -10,6 +10,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "useDefineForClassFields": false,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
