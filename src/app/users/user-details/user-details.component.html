@@ -12,28 +12,28 @@
   <form [formGroup]="userDetailsForm" class="flex flex-column align-items-center gap-6 w-full">
     <p-floatlabel class="mt-5">
       <label for="firstName">First Name</label>
-      <input class="w-20rem p-3" pInputText id="firstName" type="text" formControlName="firstName" autocomplete="off" variant="filled" />
+      <input class="w-20rem p-3" pInputText id="firstName" type="text" formControlName="firstName" autocomplete="off" />
     </p-floatlabel>
     <p-floatlabel>
       <label for="lastName">Last Name</label>
-      <input class="w-20rem p-3" pInputText id="lastName" type="text" formControlName="lastName" autocomplete="off" variant="filled" />
+      <input class="w-20rem p-3" pInputText id="lastName" type="text" formControlName="lastName" autocomplete="off" />
     </p-floatlabel>
     <p-floatlabel>
       <label for="email">Email</label>
-      <input class="w-20rem p-3" pInputText id="email" type="email" formControlName="email" autocomplete="off" variant="filled" />
+      <input class="w-20rem p-3" pInputText id="email" type="email" formControlName="email" autocomplete="off" />
     </p-floatlabel>
-    <p-select [options]="roles" id="role" formControlName="role" variant="filled" [checkmark]="true" [showClear]="true"  placeholder="Select a Role" class="w-20rem p-2 font-normal" />
+    <p-select [options]="roles" id="role" formControlName="role" [checkmark]="true" [showClear]="true"  placeholder="Select a Role" class="w-20rem p-2 font-normal" />
     <p-floatlabel>
       <p-datePicker id="createdAt" formControlName="createdAt" [iconDisplay]="'input'" [showIcon]="true" inputStyleClass="w-20rem p-3" dateFormat="dd.MM.yy" />
       <label for="createdAt">Joined</label>
     </p-floatlabel>
     <div class="flex flex-wrap gap-3 field-checkbox">
-     <p-radioButton id="active" formControlName="status" inputId="active" [value]="true" variant="filled" />
+     <p-radioButton id="active" formControlName="status" inputId="active" [value]="true" />
       <label [for]="'active'" class="font-normal">Active</label>
 
-      <p-radioButton id="inactive" formControlName="status" inputId="inactive" [value]="false" variant="filled" />
+      <p-radioButton id="inactive" formControlName="status" inputId="inactive" [value]="false" />
       <label [for]="'inactive'" class="font-normal">Inactive</label>
     </div>
-    <p-button [disabled]="userDetailsForm.pristine ||userDetailsForm.invalid" label="Save" icon="pi pi-check" iconPos="right" (click)="updateUser()" />
+    <p-button [disabled]="userDetailsForm.pristine ||userDetailsForm.invalid" label="Save" icon="pi pi-check" iconPos="right" (click)="updateUser()" styleClass="w-full" />
   </form>
 </p-dialog>

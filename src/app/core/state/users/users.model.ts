@@ -21,6 +21,5 @@ export interface AppState {
 export interface UserState extends EntityState<User> {
   selectedUserId: string | null;
   filterByKeyword: string;
-  loading: boolean;
   error: string | null;
 }

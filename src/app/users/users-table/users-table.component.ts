@@ -9,17 +9,13 @@ import {ProgressBarModule} from "primeng/progressbar";
 import {ButtonModule} from "primeng/button";
 import {IconFieldModule} from "primeng/iconfield";
 import {InputIconModule} from "primeng/inputicon";
-import {AppState, User} from "../../core/state/users/users.model";
+import {User} from "../../core/state/users/users.model";
 import {FormsModule} from "@angular/forms";
 import {SliderModule} from "primeng/slider";
 import {FormatStatusPipe} from "../../core/pipe/format.status.pipe";
 import {CardModule} from "primeng/card";
 import {Ripple} from "primeng/ripple";
 import {UserDetailsComponent} from "../user-details/user-details.component";
-import {select, Store} from "@ngrx/store";
-import {UserDetailsActions, UsersPageActions} from "../../core/state/users/users.action";
-import {Observable} from "rxjs";
-import {selectCurrentUser} from "../../core/state/users/users.selector";
 
 @Component({
   selector: 'app-users-table',

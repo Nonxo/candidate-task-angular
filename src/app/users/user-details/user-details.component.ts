@@ -32,7 +32,8 @@ export class UserDetailsComponent implements OnInit {
   @Input() user!: User | null | undefined
   @Input() visible: boolean = false
 
-  @Output() visibleChange = new EventEmitter<boolean>()
+  @Output() visibleChange = new EventEmitter<boolean>();
+  @Output() updatedUserEvent = new EventEmitter<void>();
 
   userDetailsForm!: FormGroup;
 
@@ -68,6 +69,7 @@ export class UserDetailsComponent implements OnInit {
       }
     }))
     this.hideDialog()
+    this.updatedUserEvent.emit();
   }
 
 }

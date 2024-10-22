@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import { UsersEffects } from './users.effect';
-import { UsersPageActions } from './users.action';
+import {UserDetailsActions, UsersPageActions} from './users.action';
 import { UserService } from '../../service/user.service';
 import {User} from "./users.model";
 import { TestScheduler } from 'rxjs/testing';
@@ -13,30 +13,29 @@ describe('UsersEffects', () => {
     let actions$: Observable<TypedAction<string>>;
     let effects: UsersEffects;
     let testScheduler: TestScheduler;
-    let userService: UserService;
+    let userService: jasmine.SpyObj<UserService>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 UsersEffects,
-                UserService,
                 provideMockActions(() => actions$),
                 {
                     provide: UserService,
-                    useValue: jasmine.createSpyObj('UserService', ['fetchAllUsers']),
+                    useValue: jasmine.createSpyObj('UserService', ['fetchAllUsers', 'updateUser']),
                 },
             ],
         });
 
         effects = TestBed.inject(UsersEffects);
-        userService = TestBed.inject(UserService);
+        userService = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
         testScheduler = new TestScheduler((actual, expected) => {
             expect(actual).toEqual(expected);
         });
     });
 
     it('should dispatch loadUsersSuccess action', () => {
-        testScheduler.run(({ cold, hot, expectObservable }) => {
+        testScheduler.run(({ cold, hot, expectObservable }:{ cold: ([key]: string, value: Record<string, User[]>) => Observable<any>, hot: any, expectObservable: any}) => {
 
             const users: User[] = [
                 { id: '1', firstName: 'John', lastName: 'Doe', email: 'john@example.com', status: true, role: 'admin', createdAt: '2022-01-01' },
@@ -44,17 +43,14 @@ describe('UsersEffects', () => {
             ];
 
             const action = UsersPageActions.loadUsers();
-            const completion = UsersPageActions.loadUsersSuccess({users});
-
-            spyOn(userService, 'fetchAllUsers').and.returnValue(of(users));
-
             actions$ = hot('-a', { a: action });
 
-            const expected = cold('-b', { b: completion });
+            userService.fetchAllUsers.and.returnValue(cold('--a|', { a: users }));
 
-
-            expectObservable(effects.loadUsers$).toBe('--c', { c: expected });
-            expect(userService.fetchAllUsers).toHaveBeenCalled();
+            const completion = UsersPageActions.loadUsersSuccess({ users });
+            expectObservable(effects.loadUsers$).toBe('---c', {
+                c: completion
+            });
 
         })
     });
@@ -63,18 +59,28 @@ describe('UsersEffects', () => {
         testScheduler.run(({ cold, hot, expectObservable}) => {
             const error = 'Some error occurred';
             const action = UsersPageActions.loadUsers();
+            actions$ = hot('-b', { b: action });
             const completion = UsersPageActions.loadUsersFailure({ error });
 
-            spyOn(userService, 'fetchAllUsers').and.returnValue(throwError(() => new Error(error)));
+            userService.fetchAllUsers.and.returnValue(cold('--#|', {}, error));
 
-            actions$ = hot('-a', { a: action });
 
-            const expected = cold('-b', { b: completion });
+            expectObservable(effects.loadUsers$).toBe('---c', { c: completion });
 
-            // Expect that the effect will dispatch the failure action
-            expectObservable(effects.loadUsers$).toBe('--c', { c: expected });
-            expect(userService.fetchAllUsers).toHaveBeenCalled();
+        })
+    });
 
+    it('should dispatch updateUserSuccess action', () => {
+        testScheduler.run(({ cold, hot, expectObservable }: { cold: any, hot: any, expectObservable: any }) => {
+            const user: User = { id: '1', firstName: 'Johnny', lastName: 'Doey', email: 'john@email.com', status: true, role: 'admin', createdAt: '2022-01-01' };
+            const action = UserDetailsActions.updateUser({ user });
+            actions$ = hot('-b', { b: action });
+            const completion = UserDetailsActions.updateUserSuccess({ user });
+
+            userService.updateUser.and.returnValue(cold('--b|', { b: user }));
+
+
+            expectObservable(effects.updateUser$).toBe('---c', { c: completion });
         })
     });
 });

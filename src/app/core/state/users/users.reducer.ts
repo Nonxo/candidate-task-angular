@@ -10,7 +10,6 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
 export const initialState: UserState = adapter.getInitialState({
   selectedUserId: null,
   filterByKeyword: '',
-  loading: false,
   error: null
 })
 
@@ -18,13 +17,11 @@ export const initialState: UserState = adapter.getInitialState({
 export const usersReducer = createReducer(
   initialState,
   on(UsersPageActions.loadUsersSuccess, (state, {users}) => adapter.setAll(users, {
-    ...state,
-    loading: false
+    ...state
   })),
 
   on(UsersPageActions.loadUsersFailure, (state, {error}) => ({
     ...state,
-    loading: false,
     error
   })),
 

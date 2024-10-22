@@ -40,7 +40,7 @@
         <td>{{ user.role }}</td>
         <td>{{ user.createdAt | date : 'dd.MM.yyyy' }}</td>
         <td>
-          <p-tag [value]="user.status | formatStatus" [severity]="getStatusStyle(user.status)" />
+          <p-tag [value]="user.status | formatStatus" [severity]="getStatusStyle(user.status)" rounded />
         </td>
         <td>
           <div class="flex items-center justify-center gap-2">

@@ -54,4 +54,20 @@ describe('UserService', () => {
       statusText: 'Internal Server Error',
     });
   });
+
+  it('should update user', () => {
+    const user: User = { id: '1', firstName: 'John', lastName: 'Doe', email: 'john@example.com', status: true, role: 'admin', createdAt: '2022-01-01' };
+    const updatedUser: User = { id: '1', firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', status: true, role: 'admin', createdAt: '2022-01-01' };
+
+    spyOn(service, 'getUsersFromSessionStorage').and.returnValue([user]);
+    spyOn(service, 'setUsersInSessionStorage');
+
+    service.updateUser(updatedUser).subscribe((response) => {
+      expect(response).toEqual(updatedUser);
+    });
+
+    expect(service.getUsersFromSessionStorage).toHaveBeenCalledTimes(1);
+    expect(service.setUsersInSessionStorage).toHaveBeenCalledTimes(1);
+    expect(service.setUsersInSessionStorage).toHaveBeenCalledWith([updatedUser]);
+  });
 });
