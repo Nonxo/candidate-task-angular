@@ -9,6 +9,7 @@ import { UsersTableComponent } from "./users-table/users-table.component";
 import {UserDetailsComponent} from "./user-details/user-details.component";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
+import {CardModule} from "primeng/card";
 
 @Component({
   selector: 'app-users',
@@ -16,7 +17,7 @@ import {ToastModule} from "primeng/toast";
   styleUrls: ['./users.component.scss'],
   standalone: true,
   providers: [MessageService],
-  imports: [CommonModule, UsersTableComponent, UserDetailsComponent, ToastModule],
+  imports: [CommonModule, UsersTableComponent, UserDetailsComponent, ToastModule, CardModule],
 })
 export class UsersComponent implements OnInit {
 
