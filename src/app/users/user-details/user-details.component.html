@@ -28,10 +28,10 @@
       <label for="createdAt">Joined</label>
     </p-floatlabel>
     <div class="flex flex-wrap gap-3 field-checkbox">
-     <p-radioButton id="active" formControlName="status" inputId="active" [value]="true" />
+     <p-radioButton formControlName="status" inputId="active" [value]="true" />
       <label [for]="'active'" class="font-normal">Active</label>
 
-      <p-radioButton id="inactive" formControlName="status" inputId="inactive" [value]="false" />
+      <p-radioButton formControlName="status" inputId="inactive" [value]="false" />
       <label [for]="'inactive'" class="font-normal">Inactive</label>
     </div>
     <p-button [disabled]="userDetailsForm.pristine ||userDetailsForm.invalid" label="Save" icon="pi pi-check" iconPos="right" (click)="updateUser()" styleClass="w-full" />
