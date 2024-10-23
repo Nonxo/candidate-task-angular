@@ -1,7 +1,7 @@
-<ng-container>
+<p-card class="border-round shadow-1" header="Employee Management System">
   <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />
   <app-users-table [users]="users$ | async" (viewUser)="viewUserDetails($event)" (filterKeywordChanged)="filterUsers($event)"></app-users-table>
   @if ((selectedUser$ | async) && modalVisible) {
     <app-user-details [user]="selectedUser$ | async" [visible]="modalVisible" (visibleChange)="modalVisible = $event" (updatedUserEvent)="showUpdatedUserToast()"></app-user-details>
   }
-</ng-container>
+</p-card>
